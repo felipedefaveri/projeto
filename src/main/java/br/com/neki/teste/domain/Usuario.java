@@ -8,76 +8,73 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-
-import org.springframework.format.annotation.DateTimeFormat;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="usuario")
 public class Usuario {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name="id")
-	private Integer idUsuario;
+	private Integer IdUsuario;
 	
-	@Column(unique=true)
-	private String login;
+	@Column(name="login")
+	private String Login;
 	
 	@Column(name="password")
-	private String senha;
+	private String Password;
 	
 	@Column(name="last_login_date")
-	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private LocalDate dataUltimoLogin;
+	private LocalDate DataUltimoLogin;
 
 	public Integer getIdUsuario() {
-		return idUsuario;
+		return IdUsuario;
 	}
 
 	public void setIdUsuario(Integer idUsuario) {
-		idUsuario = idUsuario;
+		IdUsuario = idUsuario;
 	}
 
 	public String getLogin() {
-		return login;
+		return Login;
 	}
 
 	public void setLogin(String login) {
-		login = login;
+		Login = login;
 	}
 
-	public String getSenha() {
-		return senha;
+	public String getPassword() {
+		return Password;
 	}
 
 	public void setPassword(String password) {
-		senha = senha;
+		Password = password;
 	}
 
 	public LocalDate getDataUltimoLogin() {
-		return dataUltimoLogin;
+		return DataUltimoLogin;
 	}
 
 	public void setDataUltimoLogin(LocalDate dataUltimoLogin) {
-		dataUltimoLogin = dataUltimoLogin;
+		DataUltimoLogin = dataUltimoLogin;
 	}
 
-	public Usuario(Integer idUsuario, String login, String senha, LocalDate dataUltimoLogin) {
+	public Usuario(Integer idUsuario, String login, String password, LocalDate dataUltimoLogin) {
 		super();
-		idUsuario = idUsuario;
-		login = login;
-		senha = senha;
-		dataUltimoLogin = dataUltimoLogin;
+		IdUsuario = idUsuario;
+		Login = login;
+		Password = password;
+		DataUltimoLogin = dataUltimoLogin;
 	}
 
 	public Usuario() {
-		
+		super();
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(dataUltimoLogin, idUsuario, login, senha);
+		return Objects.hash(DataUltimoLogin, IdUsuario, Login, Password);
 	}
 
 	@Override
@@ -89,11 +86,8 @@ public class Usuario {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		return Objects.equals(dataUltimoLogin, other.dataUltimoLogin) && Objects.equals(idUsuario, other.idUsuario)
-				&& Objects.equals(login, other.login) && Objects.equals(senha, other.senha);
+		return Objects.equals(DataUltimoLogin, other.DataUltimoLogin) && Objects.equals(IdUsuario, other.IdUsuario)
+				&& Objects.equals(Login, other.Login) && Objects.equals(Password, other.Password);
 	}
-
-	
-
 	
 }
