@@ -36,4 +36,13 @@ public class SkillService {
 		return skillRepository.save(skill);
 	}
 	
+	public Skill atualizar(Skill skill) {
+		return skillRepository.save(skill);
+	}
+	
+	public Skill deletar(Skill skill) {
+		skillRepository.delete(skill);
+		return null;
+	}
+	
 }
