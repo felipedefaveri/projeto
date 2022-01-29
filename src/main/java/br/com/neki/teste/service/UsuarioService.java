@@ -4,11 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.neki.teste.domain.Usuario;
-import br.com.neki.teste.dto.UsuarioDTO;
+import br.com.neki.teste.exception.NotFoundException;
 import br.com.neki.teste.repository.UsuarioRepository;
 
 @Service
@@ -17,16 +16,23 @@ public class UsuarioService {
 	@Autowired
 	UsuarioRepository usuarioRepository;
 	
-	@Autowired
-	PasswordEncoder passwordEncoder;
-
-	public List<Usuario> buscarTodos() {
+	public List<Usuario> listarTodas(){
+		if (usuarioRepository.findAll() == null) {
+			throw new NotFoundException("Não encontrado.");
+		}
 		return usuarioRepository.findAll();
 	}
-	 public Usuario criar(Usuario user){
-	        return usuarioRepository.save(user);
-}
-	 public Optional<UsuarioDTO> buscarPorLogin(String login){
-	        return usuarioRepository.findByLogin(login);
-}
+	
+	public Optional<Usuario> listarPorId(Long id){
+		usuarioRepository.findById(id);
+		if (usuarioRepository.findById(id) == null) {
+			throw new NotFoundException("Habilidade não encontrada.");
+		}
+		return usuarioRepository.findById(id);
+	}
+	
+	public Usuario inserir(Usuario usuario){
+		return usuarioRepository.save(usuario);
+	}
+	
 }

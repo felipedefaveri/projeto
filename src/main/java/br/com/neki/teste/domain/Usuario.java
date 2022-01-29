@@ -10,31 +10,29 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 @Entity
+@Table(name="usuario")
 public class Usuario {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name="id")
-	private Long IdUsuario;
+	private Integer IdUsuario;
 	
-	@Column(unique=true, name="login")
+	@Column(name="login")
 	private String Login;
 	
 	@Column(name="password")
 	private String Password;
 	
-	@Column(name="last_Login_date")
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@Column(name="last_login_date")
 	private LocalDate DataUltimoLogin;
 
-	public Long getIdUsuario() {
+	public Integer getIdUsuario() {
 		return IdUsuario;
 	}
 
-	public void setIdUsuario(Long idUsuario) {
+	public void setIdUsuario(Integer idUsuario) {
 		IdUsuario = idUsuario;
 	}
 
@@ -62,7 +60,7 @@ public class Usuario {
 		DataUltimoLogin = dataUltimoLogin;
 	}
 
-	public Usuario(Long idUsuario, String login, String password, LocalDate dataUltimoLogin) {
+	public Usuario(Integer idUsuario, String login, String password, LocalDate dataUltimoLogin) {
 		super();
 		IdUsuario = idUsuario;
 		Login = login;
@@ -74,6 +72,22 @@ public class Usuario {
 		super();
 	}
 
-	
+	@Override
+	public int hashCode() {
+		return Objects.hash(DataUltimoLogin, IdUsuario, Login, Password);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		return Objects.equals(DataUltimoLogin, other.DataUltimoLogin) && Objects.equals(IdUsuario, other.IdUsuario)
+				&& Objects.equals(Login, other.Login) && Objects.equals(Password, other.Password);
+	}
 	
 }
