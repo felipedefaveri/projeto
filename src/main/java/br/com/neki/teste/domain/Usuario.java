@@ -54,11 +54,11 @@ public class Usuario {
 		this.nomeUsuario = nomeUsuario;
 	}
 
-	public String getSenhaString() {
+	public String getSenha() {
 		return senha;
 	}
 
-	public void setSenhaString(String senha) {
+	public void setSenha(String senha) {
 		this.senha = senha;
 	}
 	
