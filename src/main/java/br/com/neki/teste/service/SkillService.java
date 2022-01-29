@@ -32,4 +32,8 @@ public class SkillService {
 		return skillRepository.findById(id);
 	}
 	
+	public Skill inserir(Skill skill){
+		return skillRepository.save(skill);
+	}
+	
 }
