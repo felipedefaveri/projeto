@@ -4,15 +4,15 @@ import java.time.LocalDate;
 
 public class UsuarioDTO {
 	
-	public Long Id;
+	public Long IdUsuario;
 	public String Login;
 	public String Password;
 	public LocalDate DataUltimoLogin;
 	public Long getId() {
-		return Id;
+		return IdUsuario;
 	}
-	public void setId(Long id) {
-		Id = id;
+	public void setId(Long idUsuario) {
+		IdUsuario = idUsuario;
 	}
 	public String getLogin() {
 		return Login;
@@ -32,9 +32,9 @@ public class UsuarioDTO {
 	public void setDataUltimoLogin(LocalDate dataUltimoLogin) {
 		DataUltimoLogin = dataUltimoLogin;
 	}
-	public UsuarioDTO(Long id, String login, String password, LocalDate dataUltimoLogin) {
+	public UsuarioDTO(Long idUsuario, String login, String password, LocalDate dataUltimoLogin) {
 		super();
-		Id = id;
+		IdUsuario = idUsuario;
 		Login = login;
 		Password = password;
 		DataUltimoLogin = dataUltimoLogin;

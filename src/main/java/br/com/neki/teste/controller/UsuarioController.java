@@ -8,7 +8,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,7 +29,9 @@ public class UsuarioController {
 	
 	@Autowired
 	UsuarioService usuarioService;
+	PasswordEncoder encoder;
 	
+
 	@GetMapping("/listarTudo")
 	public ResponseEntity<List<Usuario>> listar(){
 		List<Usuario> usuarios = usuarioService.listarTodas();
@@ -43,7 +46,9 @@ public class UsuarioController {
 	
 	@PostMapping("/inserir")
     @ResponseStatus(HttpStatus.CREATED)
-    public Usuario inserirUsuario( @RequestBody @Valid  Usuario usuario) {
+    public Usuario inserir( @RequestBody @Valid  Usuario usuario) { 	
+		usuario.setPassword(encoder.encode(usuario.getPassword()));
+
         return usuarioService.inserir(usuario);
     }
 	
