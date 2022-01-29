@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name="usuario")
 public class Usuario {
@@ -26,6 +28,7 @@ public class Usuario {
 	private String Password;
 	
 	@Column(name="last_login_date")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate DataUltimoLogin;
 
 	public Integer getIdUsuario() {
