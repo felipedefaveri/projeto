@@ -19,61 +19,81 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="id")
-	private Long IdUsuario;
+	private Integer idUsuario;
 	
-	@Column(name="login")
-	private String Login;
+	@Column(unique=true)
+	private String login;
 	
 	@Column(name="password")
-	private String Password;
+	private String senha;
 	
 	@Column(name="last_login_date")
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private LocalDate DataUltimoLogin;
+	private LocalDate dataUltimoLogin;
 
-	public Long getIdUsuario() {
-		return IdUsuario;
+	public Integer getIdUsuario() {
+		return idUsuario;
 	}
 
-	public void setIdUsuario(Long idUsuario) {
-		IdUsuario = idUsuario;
+	public void setIdUsuario(Integer idUsuario) {
+		idUsuario = idUsuario;
 	}
 
 	public String getLogin() {
-		return Login;
+		return login;
 	}
 
 	public void setLogin(String login) {
-		Login = login;
+		login = login;
 	}
 
-	public String getPassword() {
-		return Password;
+	public String getSenha() {
+		return senha;
 	}
 
 	public void setPassword(String password) {
-		Password = password;
+		senha = senha;
 	}
 
 	public LocalDate getDataUltimoLogin() {
-		return DataUltimoLogin;
+		return dataUltimoLogin;
 	}
 
 	public void setDataUltimoLogin(LocalDate dataUltimoLogin) {
-		DataUltimoLogin = dataUltimoLogin;
+		dataUltimoLogin = dataUltimoLogin;
 	}
 
-	public Usuario(Long idUsuario, String login, String password, LocalDate dataUltimoLogin) {
+	public Usuario(Integer idUsuario, String login, String senha, LocalDate dataUltimoLogin) {
 		super();
-		IdUsuario = idUsuario;
-		Login = login;
-		Password = password;
-		DataUltimoLogin = dataUltimoLogin;
+		idUsuario = idUsuario;
+		login = login;
+		senha = senha;
+		dataUltimoLogin = dataUltimoLogin;
 	}
 
 	public Usuario() {
-		super();
+		
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(dataUltimoLogin, idUsuario, login, senha);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		return Objects.equals(dataUltimoLogin, other.dataUltimoLogin) && Objects.equals(idUsuario, other.idUsuario)
+				&& Objects.equals(login, other.login) && Objects.equals(senha, other.senha);
+	}
+
+	
 
 	
 }
