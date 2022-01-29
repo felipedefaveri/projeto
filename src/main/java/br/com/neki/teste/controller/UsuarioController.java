@@ -8,9 +8,11 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,18 +36,32 @@ public class UsuarioController {
 	}
 	
 	@GetMapping(value = "/{id}")
-    public ResponseEntity<Optional<Usuario>> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<Optional<Usuario>> buscarPorId(@PathVariable Integer id) {
         Optional<Usuario> usuarios = usuarioService.listarPorId(id);
         return ResponseEntity.ok().body(usuarios);
     }
 	
 	@PostMapping("/inserir")
     @ResponseStatus(HttpStatus.CREATED)
-    public Usuario inserir( @RequestBody @Valid  Usuario usuario) {
+    public Usuario inserirUsuario( @RequestBody @Valid  Usuario usuario) {
         return usuarioService.inserir(usuario);
-
-
     }
+	
+	 @PutMapping("/atualizar")
+	 public Usuario atualizarUsuario(@RequestBody Usuario usuario) {
+		 return usuarioService.atualizar(usuario);
+	 }
+	
+	
+	@DeleteMapping("/deletar")
+	public void deletarUsuario(@RequestBody Usuario usuario) {
+		usuarioService.deletar(usuario);
+	}
+		
+}
+
+
+
 //	@GetMapping("/validarSenha")
 //	public ResponseEntity<Boolean> validarSenha( @RequestParam String login, @RequestParam String senha){
 //		
@@ -59,5 +75,5 @@ public class UsuarioController {
 //		
 //		HttpStatus status = (valid) ? HttpStatus.OK : HttpStatus.UNAUTHORIZED;
 //		return ResponseEntity.status(status).body(valid);	}
-}
+
 
