@@ -13,15 +13,15 @@ import javax.persistence.Id;
 public class Skill {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="id")
-	private Long IdSkill;
+	private Integer IdSkill;
 	
 	@Column(name="name")
 	private String Nome;
 	
 	@Column(name="version")
-	private String Versão;
+	private String Versao;
 	
 	@Column(name="description")
 	private String Descricao;
@@ -29,11 +29,11 @@ public class Skill {
 	@Column(name="image_url")
 	private String Imagem;
 
-	public Long getIdSkill() {
+	public Integer getIdSkill() {
 		return IdSkill;
 	}
 
-	public void setIdSkill(Long idSkill) {
+	public void setIdSkill(Integer idSkill) {
 		IdSkill = idSkill;
 	}
 
@@ -45,12 +45,12 @@ public class Skill {
 		Nome = nome;
 	}
 
-	public String getVersão() {
-		return Versão;
+	public String getVersao() {
+		return Versao;
 	}
 
-	public void setVersão(String versão) {
-		Versão = versão;
+	public void setVersao(String versao) {
+		Versao = versao;
 	}
 
 	public String getDescricao() {
@@ -69,19 +69,19 @@ public class Skill {
 		Imagem = imagem;
 	}
 
-	public Skill(Long idSkill, String nome, String versão, String descricao, String imagem) {
+	public Skill(Integer idSkill, String nome, String versao, String descricao, String imagem) {
 		super();
 		IdSkill = idSkill;
 		Nome = nome;
-		Versão = versão;
+		Versao = versao;
 		Descricao = descricao;
 		Imagem = imagem;
 	}
-
+	
+	
 	public Skill() {
 		super();
 	}
 	
-	
 
-	}
+}
