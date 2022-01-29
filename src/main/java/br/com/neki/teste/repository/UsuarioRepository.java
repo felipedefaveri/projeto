@@ -12,7 +12,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 	@Query(value="select login from usuario;", nativeQuery=true)
 	Optional<UsuarioDTO> findByLogin(String login);
 
-	Usuario save(String usuario);
+
+	
 	
 	
 } 
