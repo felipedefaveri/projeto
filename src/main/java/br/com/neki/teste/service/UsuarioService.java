@@ -26,7 +26,7 @@ public class UsuarioService {
 		return usuarioRepository.findAll();
 	}
 	
-	public Optional<Usuario> listarPorId(Long id){
+	public Optional<Usuario> listarPorId(Integer id){
 		usuarioRepository.findById(id);
 		if (usuarioRepository.findById(id) == null) {
 			throw new NotFoundException("Habilidade não encontrada.");
@@ -38,4 +38,12 @@ public class UsuarioService {
 		return usuarioRepository.save(usuario);
 	}
 	
+	public Usuario atualizar(Usuario usuario) {
+		return usuarioRepository.save(usuario);
+	}
+	
+	public Usuario deletar(Usuario usuario) {
+		usuarioRepository.delete(usuario);
+		return null;
+	}
 }
