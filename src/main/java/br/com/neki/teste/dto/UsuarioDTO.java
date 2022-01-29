@@ -4,34 +4,40 @@ import java.time.LocalDate;
 
 public class UsuarioDTO {
 	
-	public Integer id;
-	public String login;
-	public String senha;
-	public LocalDate ultimaDataLogin;
-	
-	public Integer getId() {
-		return id;
+	public Long Id;
+	public String Login;
+	public String Password;
+	public LocalDate DataUltimoLogin;
+	public Long getId() {
+		return Id;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId(Long id) {
+		Id = id;
 	}
 	public String getLogin() {
-		return login;
+		return Login;
 	}
 	public void setLogin(String login) {
-		this.login = login;
+		Login = login;
 	}
-	public String getSenha() {
-		return senha;
+	public String getPassword() {
+		return Password;
 	}
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setPassword(String password) {
+		Password = password;
 	}
-	public LocalDate getUltimaDataLogin() {
-		return ultimaDataLogin;
+	public LocalDate getDataUltimoLogin() {
+		return DataUltimoLogin;
 	}
-	public void setUltimaDataLogin(LocalDate ultimaDataLogin) {
-		this.ultimaDataLogin = ultimaDataLogin;
+	public void setDataUltimoLogin(LocalDate dataUltimoLogin) {
+		DataUltimoLogin = dataUltimoLogin;
+	}
+	public UsuarioDTO(Long id, String login, String password, LocalDate dataUltimoLogin) {
+		super();
+		Id = id;
+		Login = login;
+		Password = password;
+		DataUltimoLogin = dataUltimoLogin;
 	}
 	public UsuarioDTO() {
 		super();
