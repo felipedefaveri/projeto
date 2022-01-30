@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import br.com.neki.teste.domain.Skill;
 import br.com.neki.teste.repository.SkillRepository;
-import javassist.NotFoundException;
 
 
 @Service
