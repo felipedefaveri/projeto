@@ -11,71 +11,70 @@ import javax.persistence.Id;
 @Entity
 @Table(name="skill")
 public class Skill {
-	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="id")
-	private Long IdSkill;
+	private Long idSkill;
 	
 	@Column(name="name")
-	private String Nome;
+	private String nome;
 	
 	@Column(name="version")
-	private String Versão;
+	private String versao;
 	
 	@Column(name="description")
-	private String Descricao;
+	private String descricao;
 	
 	@Column(name="image_url")
-	private String Imagem;
+	private String imagem;
 
 	public Long getIdSkill() {
-		return IdSkill;
+		return idSkill;
 	}
 
 	public void setIdSkill(Long idSkill) {
-		IdSkill = idSkill;
+		this.idSkill = idSkill;
 	}
 
 	public String getNome() {
-		return Nome;
+		return nome;
 	}
 
 	public void setNome(String nome) {
-		Nome = nome;
+		this.nome = nome;
 	}
 
-	public String getVersão() {
-		return Versão;
+	public String getVersao() {
+		return versao;
 	}
 
-	public void setVersão(String versão) {
-		Versão = versão;
+	public void setVersao(String versao) {
+		this.versao = versao;
 	}
 
 	public String getDescricao() {
-		return Descricao;
+		return descricao;
 	}
 
 	public void setDescricao(String descricao) {
-		Descricao = descricao;
+		this.descricao = descricao;
 	}
 
 	public String getImagem() {
-		return Imagem;
+		return imagem;
 	}
 
 	public void setImagem(String imagem) {
-		Imagem = imagem;
+		this.imagem = imagem;
 	}
 
-	public Skill(Long idSkill, String nome, String versão, String descricao, String imagem) {
+	public Skill(Long idSkill, String nome, String versao, String descricao, String imagem) {
 		super();
-		IdSkill = idSkill;
-		Nome = nome;
-		Versão = versão;
-		Descricao = descricao;
-		Imagem = imagem;
+		this.idSkill = idSkill;
+		this.nome = nome;
+		this.versao = versao;
+		this.descricao = descricao;
+		this.imagem = imagem;
 	}
 
 	public Skill() {
