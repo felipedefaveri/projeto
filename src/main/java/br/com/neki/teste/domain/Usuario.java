@@ -1,66 +1,79 @@
 package br.com.neki.teste.domain;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name= "usuario")
 public class Usuario {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	@Column(name="id")
+	private Long IdUsuario;
 	
-	@Column(name= "last_login_date")
+	@Column(name="login")
+	private String Login;
+	
+	@Column(name="password")
+	private String Password;
+	
+	@Column(name="last_login_date")
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private  LocalDate ultimoLogin;
-	
-	@Column(name = "login")
-	private String nomeUsuario;
-	
-	@Column(name = "password")
-	private String senha;
+	private LocalDate DataUltimoLogin;
 
-	
-	public Integer getId() {
-		return id;
+	public Long getIdUsuario() {
+		return IdUsuario;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setIdUsuario(Long idUsuario) {
+		IdUsuario = idUsuario;
 	}
 
-	public LocalDate getUltimoLogin() {
-		return ultimoLogin;
+	public String getLogin() {
+		return Login;
 	}
 
-	public void setUltimoLogin(LocalDate ultimoLogin) {
-		this.ultimoLogin = ultimoLogin;
+	public void setLogin(String login) {
+		Login = login;
 	}
 
-	public String getNomeUsuario() {
-		return nomeUsuario;
+	public String getPassword() {
+		return Password;
 	}
 
-	public void setNomeUsuario(String nomeUsuario) {
-		this.nomeUsuario = nomeUsuario;
+	public void setPassword(String password) {
+		Password = password;
 	}
 
-	public String getSenha() {
-		return senha;
+	public LocalDate getDataUltimoLogin() {
+		return DataUltimoLogin;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setDataUltimoLogin(LocalDate dataUltimoLogin) {
+		DataUltimoLogin = dataUltimoLogin;
 	}
-	
+
+	public Usuario(Long idUsuario, String login, String password, LocalDate dataUltimoLogin) {
+		super();
+		IdUsuario = idUsuario;
+		Login = login;
+		Password = password;
+		DataUltimoLogin = dataUltimoLogin;
+	}
+
+	public Usuario() {
+		super();
+	}
+
 	
 }

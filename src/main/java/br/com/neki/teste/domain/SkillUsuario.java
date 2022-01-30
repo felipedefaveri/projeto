@@ -10,13 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
-@Table(name="user_skill")
 public class SkillUsuario {
 	
 	@Id
@@ -26,22 +22,20 @@ public class SkillUsuario {
 	
 	@ManyToOne
 	@JoinColumn(name="user_id")
-	private Usuario Usuario;
+	private Usuario usuario;
 	
 	@ManyToOne
 	@JoinColumn(name="skill_id")
-	private Skill Skill;
+	private Skill skill;
 	
 	@Column(name="knowledge_level")
 	private Long NivelConhecimento;
 	
-	@Column(name="created_at")
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@Column
 	private LocalDate CreatedAt;
 	
-	@Column(name="updated_at")
-	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private LocalDate UpdatedAt;
+	@Column
+	private LocalDate UpdateAt;
 
 	public Long getId() {
 		return Id;
@@ -52,19 +46,19 @@ public class SkillUsuario {
 	}
 
 	public Usuario getUsuario() {
-		return Usuario;
+		return usuario;
 	}
 
 	public void setUsuario(Usuario usuario) {
-		this.Usuario = usuario;
+		this.usuario = usuario;
 	}
 
 	public Skill getSkill() {
-		return Skill;
+		return skill;
 	}
 
 	public void setSkill(Skill skill) {
-		this.Skill = skill;
+		this.skill = skill;
 	}
 
 	public Long getNivelConhecimento() {
@@ -83,23 +77,23 @@ public class SkillUsuario {
 		CreatedAt = createdAt;
 	}
 
-	public LocalDate getUpdatedAt() {
-		return UpdatedAt;
+	public LocalDate getUpdateAt() {
+		return UpdateAt;
 	}
 
-	public void setUpdateAt(LocalDate updatedAt) {
-		UpdatedAt = updatedAt;
+	public void setUpdateAt(LocalDate updateAt) {
+		UpdateAt = updateAt;
 	}
 
 	public SkillUsuario(Long id, Usuario usuario, Skill skill, Long nivelConhecimento, LocalDate createdAt,
-			LocalDate updatedAt) {
+			LocalDate updateAt) {
 		super();
 		Id = id;
-		this.Usuario = usuario;
-		this.Skill = skill;
+		this.usuario = usuario;
+		this.skill = skill;
 		NivelConhecimento = nivelConhecimento;
 		CreatedAt = createdAt;
-		UpdatedAt = updatedAt;
+		UpdateAt = updateAt;
 	}
 
 	public SkillUsuario() {
@@ -108,7 +102,7 @@ public class SkillUsuario {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(CreatedAt, Id, NivelConhecimento, UpdatedAt);
+		return Objects.hash(CreatedAt, Id, NivelConhecimento, UpdateAt);
 	}
 
 	@Override
@@ -122,7 +116,7 @@ public class SkillUsuario {
 		SkillUsuario other = (SkillUsuario) obj;
 		return Objects.equals(CreatedAt, other.CreatedAt) && Objects.equals(Id, other.Id)
 				&& Objects.equals(NivelConhecimento, other.NivelConhecimento)
-				&& Objects.equals(UpdatedAt, other.UpdatedAt);
+				&& Objects.equals(UpdateAt, other.UpdateAt);
 	}
 
 	
