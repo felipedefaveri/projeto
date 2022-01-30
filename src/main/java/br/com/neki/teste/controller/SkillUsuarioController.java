@@ -21,41 +21,38 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.neki.teste.domain.SkillUsuario;
 import br.com.neki.teste.service.SkillUsuarioService;
 
-
 @RestController
 @RequestMapping("/usuarioSkill")
 public class SkillUsuarioController {
-	
-	
+
 	@Autowired
 	SkillUsuarioService skillUsuarioService;
-	
+
 	@GetMapping("/listarTudo")
-	public ResponseEntity<List<SkillUsuario>> listar(){
+	public ResponseEntity<List<SkillUsuario>> listar() {
 		List<SkillUsuario> skillUsuarios = skillUsuarioService.listarTodas();
 		return ResponseEntity.ok(skillUsuarios);
 	}
-	
+
 	@GetMapping(value = "/{id}")
-    public ResponseEntity<Optional<SkillUsuario>> buscarPorId(@PathVariable Long id) {
-        Optional<SkillUsuario> skill = skillUsuarioService.listarPorId(id);
-        return ResponseEntity.ok().body(skill);
-    }
-	
+	public ResponseEntity<Optional<SkillUsuario>> buscarPorId(@PathVariable Long id) {
+		Optional<SkillUsuario> skill = skillUsuarioService.listarPorId(id);
+		return ResponseEntity.ok().body(skill);
+	}
+
 	@PostMapping("/inserir")
-    @ResponseStatus(HttpStatus.CREATED)
-    public SkillUsuario inserirHabilidade( @RequestBody @Valid  SkillUsuario skillUsuario) {
-        return skillUsuarioService.inserir(skillUsuario);
-    }
-	
-	 @PutMapping("/{id}")
-	 public SkillUsuario atualizarHabilidade(@RequestBody SkillUsuario skillUsuario) {
-		 return skillUsuarioService.atualizar(skillUsuario);
-	 }
-	
-	
+	@ResponseStatus(HttpStatus.CREATED)
+	public SkillUsuario inserirHabilidade(@RequestBody @Valid SkillUsuario skillUsuario) {
+		return skillUsuarioService.inserir(skillUsuario);
+	}
+
+	@PutMapping("/{id}")
+	public SkillUsuario atualizarHabilidade(@RequestBody SkillUsuario skillUsuario) {
+		return skillUsuarioService.atualizar(skillUsuario);
+	}
+
 	@DeleteMapping("/{id}")
-public void deletarHabilidade(@PathVariable Long id) {
+	public void deletarHabilidade(@PathVariable Long id) {
 		skillUsuarioService.deletar(id);
 	}
 }

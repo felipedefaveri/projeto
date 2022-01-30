@@ -14,33 +14,32 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-
 @Entity
-@Table(name="user_skill")
+@Table(name = "user_skill")
 public class SkillUsuario {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name = "id")
 	private Long id;
-	
+
 	@ManyToOne
-	@JoinColumn(name="user_id")
+	@JoinColumn(name = "user_id")
 	private Usuario usuario;
-	
+
 	@ManyToOne
-	@JoinColumn(name="skill_id")
+	@JoinColumn(name = "skill_id")
 	private Skill skill;
-	
-	@Column(name="knowledge_level")
+
+	@Column(name = "knowledge_level")
 	private Long nivelConhecimento;
-	
-	@Column(name="created_at")
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+
+	@Column(name = "created_at")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate createdAt;
-	
-	@Column(name="updated_at")
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+
+	@Column(name = "updated_at")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate updateAt;
 
 	public Long getId() {
@@ -125,5 +124,4 @@ public class SkillUsuario {
 				&& Objects.equals(updateAt, other.updateAt);
 	}
 
-	
 }
