@@ -19,41 +19,43 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.neki.teste.domain.SkillUsuario;
-import br.com.neki.teste.repository.SkillUsuarioRepository;
+import br.com.neki.teste.service.SkillUsuarioService;
 
 
 @RestController
 @RequestMapping("/usuarioSkill")
 public class SkillUsuarioController {
+	
+	
 	@Autowired
-	SkillUsuarioRepository skillUsuarioRepository;
+	SkillUsuarioService skillUsuarioService;
 	
 	@GetMapping("/listarTudo")
 	public ResponseEntity<List<SkillUsuario>> listar(){
-		List<SkillUsuario> skillUsuarios = skillUsuarioRepository.findAll();
+		List<SkillUsuario> skillUsuarios = skillUsuarioService.listarTodas();
 		return ResponseEntity.ok(skillUsuarios);
 	}
 	
 	@GetMapping(value = "/{id}")
     public ResponseEntity<Optional<SkillUsuario>> buscarPorId(@PathVariable Long id) {
-        Optional<SkillUsuario> skill = skillUsuarioRepository.findById(id);
+        Optional<SkillUsuario> skill = skillUsuarioService.listarPorId(id);
         return ResponseEntity.ok().body(skill);
     }
 	
 	@PostMapping("/inserir")
     @ResponseStatus(HttpStatus.CREATED)
     public SkillUsuario inserirHabilidade( @RequestBody @Valid  SkillUsuario skillUsuario) {
-        return skillUsuarioRepository.save(skillUsuario);
+        return skillUsuarioService.inserir(skillUsuario);
     }
 	
 	 @PutMapping("/{id}")
 	 public SkillUsuario atualizarHabilidade(@RequestBody SkillUsuario skillUsuario) {
-		 return skillUsuarioRepository.saveAndFlush(skillUsuario);
+		 return skillUsuarioService.atualizar(skillUsuario);
 	 }
 	
 	
 	@DeleteMapping("/{id}")
 public void deletarHabilidade(@PathVariable Long id) {
-		skillUsuarioRepository.deleteById(id);
+		skillUsuarioService.deletar(id);
 	}
 }
