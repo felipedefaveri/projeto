@@ -9,15 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.neki.teste.domain.SkillUsuario;
 import br.com.neki.teste.domain.Usuario;
 import br.com.neki.teste.repository.UsuarioRepository;
 
@@ -49,6 +52,17 @@ public class UsuarioController {
 			return ResponseEntity.ok(usuario.get());
 		}
 		return ResponseEntity.notFound().build();
+	}
+	@PutMapping("/{id}")
+	 public Usuario atualizarHabilidade(@RequestBody Usuario usuario) {
+		usuario.setPassword(encoder.encode(usuario.getPassword()));
+		 return usuarioRepository.saveAndFlush(usuario);
+	 }
+	
+	
+	@DeleteMapping("/{id}")
+public void deletarHabilidade(@PathVariable Long id) {
+		usuarioRepository.deleteById(id);
 	}
 //	@GetMapping("/{login}")
 //	public ResponseEntity<Usuario> listarTudo(@PathVariable S id) {
