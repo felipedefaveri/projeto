@@ -14,70 +14,82 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.neki.teste.domain.SkillUsuario;
 import br.com.neki.teste.domain.Usuario;
-import br.com.neki.teste.service.UsuarioService;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import br.com.neki.teste.repository.UsuarioRepository;
 
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
-
-	@Autowired
-	UsuarioService usuarioService;
-	PasswordEncoder encoder;
-
-	@GetMapping("/listarTudo")
-	public ResponseEntity<List<Usuario>> listar() {
-		List<Usuario> usuarios = usuarioService.listarTodas();
-		return ResponseEntity.ok(usuarios);
+	
+	private final UsuarioRepository usuarioRepository;
+	
+	
+	private final PasswordEncoder encoder;
+	
+	public UsuarioController(UsuarioRepository usuarioRepository, PasswordEncoder encoder) {
+		super();
+		this.usuarioRepository = usuarioRepository;
+		this.encoder = encoder;
 	}
 
-	@GetMapping(value = "/{id}")
-	public ResponseEntity<Optional<Usuario>> buscarPorId(@PathVariable Integer id) {
-		Optional<Usuario> usuarios = usuarioService.listarPorId(id);
-		return ResponseEntity.ok().body(usuarios);
+	@GetMapping("/listarTodos")
+	public ResponseEntity<List<Usuario>> listarTodos(){
+		
+		return ResponseEntity.ok(usuarioRepository.findAll());
 	}
-
-//	@PostMapping("/inserir")
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public Usuario inserir( @RequestBody @Valid  Usuario usuario) { 	
-//		usuario.setSenha(encoder.encode(usuario.getSenha()));
-//
-//        return usuarioService.inserir(usuario);
-//    }
-
-	@PostMapping("/inserir")
-	@ResponseStatus(HttpStatus.CREATED)
-	public Usuario inserirHabilidade(@RequestBody @Valid Usuario usuario) {
-		return usuarioService.inserir(usuario);
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<Usuario> listarTudo(@PathVariable Long id) {
+		Optional<Usuario> usuario = usuarioRepository.findById(id);
+		if(usuario.isPresent()) {
+			return ResponseEntity.ok(usuario.get());
+		}
+		return ResponseEntity.notFound().build();
 	}
-
-	@PutMapping("/atualizar")
-	public Usuario atualizarUsuario(@RequestBody Usuario usuario) {
-		return usuarioService.atualizar(usuario);
+	@PutMapping("/{id}")
+	 public Usuario atualizarHabilidade(@RequestBody Usuario usuario) {
+		usuario.setPassword(encoder.encode(usuario.getPassword()));
+		 return usuarioRepository.saveAndFlush(usuario);
+	 }
+	
+	
+	@DeleteMapping("/{id}")
+public void deletarHabilidade(@PathVariable Long id) {
+		usuarioRepository.deleteById(id);
 	}
-
-	@DeleteMapping("/deletar")
-	public void deletarUsuario(@RequestBody Usuario usuario) {
-		usuarioService.deletar(usuario);
+//	@GetMapping("/{login}")
+//	public ResponseEntity<Usuario> listarTudo(@PathVariable S id) {
+//		Optional<Usuario> usuario = usuarioRepository.findByLogin(id);
+//		if(usuario.isPresent()) {
+//			return ResponseEntity.ok(usuario.get());
+//		}
+//		return ResponseEntity.notFound().build();
+//	}
+	@PostMapping("/salvar")
+	public Usuario inserir( @RequestBody Usuario usuario) {
+		usuario.setPassword(encoder.encode(usuario.getPassword()));
+		return usuarioRepository.save(usuario);
+		
 	}
-
-}
-
 //	@GetMapping("/validarSenha")
-//	public ResponseEntity<Boolean> validarSenha( @RequestParam String login, @RequestParam String senha){
+//	public ResponseEntity<Boolean> validarSenha(@RequestParam String login, @RequestParam String password){
 //		
-//		Optional<UsuarioLoginDTO> optUsuario = usuarioRepository.findByLogin(login);
+//		Optional<Usuario> optUsuario = usuarioRepository.findByLogin(login);
 //		if (optUsuario.isEmpty()) {
 //			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
 //		}
 //		
-//		UsuarioLoginDTO user = optUsuario.get();
-//		boolean valid = encoder.matches(senha, user.getSenha());
+//		Usuario usuario = optUsuario.get();
+//		boolean valid = encoder.matches(password, usuario.getPassword());
 //		
 //		HttpStatus status = (valid) ? HttpStatus.OK : HttpStatus.UNAUTHORIZED;
 //		return ResponseEntity.status(status).body(valid);	}
+//}
+}

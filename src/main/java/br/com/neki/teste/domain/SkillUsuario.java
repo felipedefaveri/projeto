@@ -22,84 +22,84 @@ public class SkillUsuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
-	private Long Id;
+	private Long id;
 	
 	@ManyToOne
 	@JoinColumn(name="user_id")
-	private Usuario Usuario;
+	private Usuario usuario;
 	
 	@ManyToOne
 	@JoinColumn(name="skill_id")
-	private Skill Skill;
+	private Skill skill;
 	
 	@Column(name="knowledge_level")
-	private Long NivelConhecimento;
+	private Long nivelConhecimento;
 	
 	@Column(name="created_at")
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private LocalDate CreatedAt;
+	private LocalDate createdAt;
 	
 	@Column(name="updated_at")
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private LocalDate UpdatedAt;
+	private LocalDate updateAt;
 
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public Usuario getUsuario() {
-		return Usuario;
+		return usuario;
 	}
 
 	public void setUsuario(Usuario usuario) {
-		this.Usuario = usuario;
+		this.usuario = usuario;
 	}
 
 	public Skill getSkill() {
-		return Skill;
+		return skill;
 	}
 
 	public void setSkill(Skill skill) {
-		this.Skill = skill;
+		this.skill = skill;
 	}
 
 	public Long getNivelConhecimento() {
-		return NivelConhecimento;
+		return nivelConhecimento;
 	}
 
 	public void setNivelConhecimento(Long nivelConhecimento) {
-		NivelConhecimento = nivelConhecimento;
+		this.nivelConhecimento = nivelConhecimento;
 	}
 
 	public LocalDate getCreatedAt() {
-		return CreatedAt;
+		return createdAt;
 	}
 
 	public void setCreatedAt(LocalDate createdAt) {
-		CreatedAt = createdAt;
+		this.createdAt = createdAt;
 	}
 
-	public LocalDate getUpdatedAt() {
-		return UpdatedAt;
+	public LocalDate getUpdateAt() {
+		return updateAt;
 	}
 
-	public void setUpdateAt(LocalDate updatedAt) {
-		UpdatedAt = updatedAt;
+	public void setUpdateAt(LocalDate updateAt) {
+		this.updateAt = updateAt;
 	}
 
 	public SkillUsuario(Long id, Usuario usuario, Skill skill, Long nivelConhecimento, LocalDate createdAt,
-			LocalDate updatedAt) {
+			LocalDate updateAt) {
 		super();
-		Id = id;
-		this.Usuario = usuario;
-		this.Skill = skill;
-		NivelConhecimento = nivelConhecimento;
-		CreatedAt = createdAt;
-		UpdatedAt = updatedAt;
+		this.id = id;
+		this.usuario = usuario;
+		this.skill = skill;
+		this.nivelConhecimento = nivelConhecimento;
+		this.createdAt = createdAt;
+		this.updateAt = updateAt;
 	}
 
 	public SkillUsuario() {
@@ -108,7 +108,7 @@ public class SkillUsuario {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(CreatedAt, Id, NivelConhecimento, UpdatedAt);
+		return Objects.hash(createdAt, id, nivelConhecimento, updateAt);
 	}
 
 	@Override
@@ -120,9 +120,9 @@ public class SkillUsuario {
 		if (getClass() != obj.getClass())
 			return false;
 		SkillUsuario other = (SkillUsuario) obj;
-		return Objects.equals(CreatedAt, other.CreatedAt) && Objects.equals(Id, other.Id)
-				&& Objects.equals(NivelConhecimento, other.NivelConhecimento)
-				&& Objects.equals(UpdatedAt, other.UpdatedAt);
+		return Objects.equals(createdAt, other.createdAt) && Objects.equals(id, other.id)
+				&& Objects.equals(nivelConhecimento, other.nivelConhecimento)
+				&& Objects.equals(updateAt, other.updateAt);
 	}
 
 	
