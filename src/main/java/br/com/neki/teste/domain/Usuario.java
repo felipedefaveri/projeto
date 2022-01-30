@@ -1,7 +1,6 @@
 package br.com.neki.teste.domain;
 
 import java.time.LocalDate;
-import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,84 +12,55 @@ import javax.persistence.Table;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name="usuario")
+@Table(name= "usuario")
 public class Usuario {
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	@Column(name="id")
-	private Integer IdUsuario;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 	
-	@Column(name="login")
-	private String Login;
-	
-	@Column(name="password")
-	private String Password;
-	
-	@Column(name="last_login_date")
+	@Column(name= "last_login_date")
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private LocalDate DataUltimoLogin;
+	private  LocalDate ultimoLogin;
+	
+	@Column(name = "login")
+	private String nomeUsuario;
+	
+	@Column(name = "password")
+	private String senha;
 
-	public Integer getIdUsuario() {
-		return IdUsuario;
+	
+	public Integer getId() {
+		return id;
 	}
 
-	public void setIdUsuario(Integer idUsuario) {
-		IdUsuario = idUsuario;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public String getLogin() {
-		return Login;
+	public LocalDate getUltimoLogin() {
+		return ultimoLogin;
 	}
 
-	public void setLogin(String login) {
-		Login = login;
+	public void setUltimoLogin(LocalDate ultimoLogin) {
+		this.ultimoLogin = ultimoLogin;
 	}
 
-	public String getPassword() {
-		return Password;
+	public String getNomeUsuario() {
+		return nomeUsuario;
 	}
 
-	public void setPassword(String password) {
-		Password = password;
+	public void setNomeUsuario(String nomeUsuario) {
+		this.nomeUsuario = nomeUsuario;
 	}
 
-	public LocalDate getDataUltimoLogin() {
-		return DataUltimoLogin;
+	public String getSenha() {
+		return senha;
 	}
 
-	public void setDataUltimoLogin(LocalDate dataUltimoLogin) {
-		DataUltimoLogin = dataUltimoLogin;
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
-
-	public Usuario(Integer idUsuario, String login, String password, LocalDate dataUltimoLogin) {
-		super();
-		IdUsuario = idUsuario;
-		Login = login;
-		Password = password;
-		DataUltimoLogin = dataUltimoLogin;
-	}
-
-	public Usuario() {
-		super();
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(DataUltimoLogin, IdUsuario, Login, Password);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Usuario other = (Usuario) obj;
-		return Objects.equals(DataUltimoLogin, other.DataUltimoLogin) && Objects.equals(IdUsuario, other.IdUsuario)
-				&& Objects.equals(Login, other.Login) && Objects.equals(Password, other.Password);
-	}
+	
 	
 }
